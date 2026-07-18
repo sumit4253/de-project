@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-5">
+    <h2 class="fw-bold mb-4"><i class="fa-solid fa-clock-rotate-left text-success me-2"></i>Calculation History</h2>
+    
+    <div class="glassmorphism p-4 rounded-4">
+        {% if records %}
+        <div class="table-responsive">
+            <table class="table table-dark table-hover table-borderless align-middle custom-table">
+                <thead>
+                    <tr class="text-muted border-bottom border-secondary">
+                        <th>Date</th>
+                        <th>Location</th>
+                        <th>Farm Size</th>
+                        <th>Crop</th>
+                        <th>Weather</th>
+                        <th>Water Required</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in records %}
+                    <tr>
+                        <td>{{ row.calculation_date.strftime('%Y-%m-%d %H:%M') }}</td>
+                        <td class="fw-semibold">{{ row.city }}</td>
+                        <td>{{ row.farm_size }} m²</td>
+                        <td>
+                            {% if row.crop_name %}
+                                <span class="badge bg-success bg-opacity-25 text-success border border-success">{{ row.crop_name }}</span>
+                            {% else %}
+                                <span class="text-muted">Auto Fallback</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <span title="Temp"><i class="fa-solid fa-temperature-half text-warning"></i> {{ row.temperature }}°C</span>
+                            <span class="ms-2" title="Humidity"><i class="fa-solid fa-droplet text-primary"></i> {{ row.humidity }}%</span>
+                        </td>
+                        <td class="fw-bold text-info">{{ row.water_required }} L</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="text-center py-5">
+            <i class="fa-solid fa-folder-open fa-3x text-muted mb-3 opacity-50"></i>
+            <h5 class="text-muted">No history found.</h5>
+            <p class="text-muted small">Go to the dashboard and make your first calculation!</p>
+            <a href="{{ url_for('dashboard') }}" class="btn btn-outline-success mt-2">Go to Dashboard</a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

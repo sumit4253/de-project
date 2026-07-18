@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section text-center py-5 mt-5">
+    <div class="container position-relative z-1">
+        <h1 class="display-3 fw-bolder mb-4 hero-title">Precision Agriculture <br><span class="text-success">Powered by Data</span></h1>
+        <p class="lead text-muted mx-auto mb-5" style="max-width: 600px;">
+            Optimize your water usage, increase crop yield, and make smarter farming decisions with real-time weather integration and advanced analytics.
+        </p>
+        <div class="d-flex justify-content-center gap-3">
+            <a href="{{ url_for('register') }}" class="btn btn-success btn-lg rounded-pill px-5 shadow-lg hero-btn">Get Started</a>
+            <a href="#features" class="btn btn-outline-light btn-lg rounded-pill px-5 hero-btn-outline">Learn More</a>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section id="features" class="py-5 my-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Why Choose Smart Irrigator?</h2>
+            <p class="text-muted">Built for modern farmers and agricultural planners.</p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="feature-card glassmorphism p-4 h-100 text-center rounded-4">
+                    <div class="icon-wrapper mb-3 mx-auto">
+                        <i class="fa-solid fa-cloud-sun fa-2x text-warning"></i>
+                    </div>
+                    <h4>Real-time Weather</h4>
+                    <p class="text-muted text-sm">Integrates with OpenWeatherMap to pull live temperature, humidity, and rainfall data for your exact location.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card glassmorphism p-4 h-100 text-center rounded-4">
+                    <div class="icon-wrapper mb-3 mx-auto">
+                        <i class="fa-solid fa-leaf fa-2x text-success"></i>
+                    </div>
+                    <h4>Smart Crop Logic</h4>
+                    <p class="text-muted text-sm">Automatically recommends the best crops suited for your local climatic conditions to maximize yield.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card glassmorphism p-4 h-100 text-center rounded-4">
+                    <div class="icon-wrapper mb-3 mx-auto">
+                        <i class="fa-solid fa-chart-line fa-2x text-info"></i>
+                    </div>
+                    <h4>Analytics & Reports</h4>
+                    <p class="text-muted text-sm">Track your water usage history over time and export detailed reports in PDF or Excel format.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

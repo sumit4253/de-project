@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold">Farmer Dashboard</h2>
+        <div>
+            <button class="btn btn-outline-success btn-sm me-2" onclick="window.print()">
+                <i class="fa-solid fa-print"></i> Print
+            </button>
+            <button class="btn btn-success btn-sm" id="export-pdf-btn">
+                <i class="fa-solid fa-file-pdf"></i> Export PDF
+            </button>
+        </div>
+    </div>
+
+    <div class="row g-4" id="dashboard-content">
+        <!-- Input Section -->
+        <div class="col-lg-4">
+            <div class="glassmorphism p-4 rounded-4 h-100">
+                <h4 class="mb-4 fw-bold text-success"><i class="fa-solid fa-location-dot me-2"></i>Location & Data</h4>
+                <form id="calculator-form">
+                    <div class="mb-3">
+                        <label class="form-label text-muted small fw-semibold">City / Location</label>
+                        <input type="text" class="form-control custom-input" id="city" required placeholder="e.g., Modasa">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label text-muted small fw-semibold">Farm Size (Sq. Meters)</label>
+                        <input type="number" class="form-control custom-input" id="farm-size" required placeholder="1000">
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label text-muted small fw-semibold">Current Soil Moisture (%)</label>
+                        <input type="number" class="form-control custom-input" id="soil-moisture" required placeholder="40" min="0" max="100">
+                        <div class="form-text text-muted" style="font-size: 0.75rem;">Manual input from your field sensor.</div>
+                    </div>
+                    <button type="submit" class="btn btn-success w-100 rounded-pill py-2 shadow" id="calc-btn">
+                        Analyze & Calculate
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Weather Module -->
+        <div class="col-lg-8">
+            <div class="glassmorphism p-4 rounded-4 h-100 position-relative">
+                <h4 class="mb-4 fw-bold text-info"><i class="fa-solid fa-cloud-sun me-2"></i>Live Weather Data</h4>
+                
+                <div id="weather-loading" class="text-center py-5 d-none">
+                    <div class="spinner-border text-info" role="status"></div>
+                    <p class="mt-2 text-muted">Fetching from OpenWeatherMap...</p>
+                </div>
+                
+                <div id="weather-content" class="row g-3 opacity-50">
+                    <!-- Cards -->
+                    <div class="col-md-4 col-6">
+                        <div class="weather-card p-3 rounded-3 text-center border border-secondary border-opacity-25">
+                            <i class="fa-solid fa-temperature-half fa-2x text-warning mb-2"></i>
+                            <h5 class="mb-0 fw-bold" id="w-temp">-- °C</h5>
+                            <span class="text-muted small">Temperature</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-6">
+                        <div class="weather-card p-3 rounded-3 text-center border border-secondary border-opacity-25">
+                            <i class="fa-solid fa-droplet fa-2x text-primary mb-2"></i>
+                            <h5 class="mb-0 fw-bold" id="w-humidity">-- %</h5>
+                            <span class="text-muted small">Humidity</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-6">
+                        <div class="weather-card p-3 rounded-3 text-center border border-secondary border-opacity-25">
+                            <i class="fa-solid fa-wind fa-2x text-info mb-2"></i>
+                            <h5 class="mb-0 fw-bold" id="w-wind">-- m/s</h5>
+                            <span class="text-muted small">Wind Speed</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-6">
+                        <div class="weather-card p-3 rounded-3 text-center border border-secondary border-opacity-25">
+                            <i class="fa-solid fa-cloud fa-2x text-secondary mb-2"></i>
+                            <h5 class="mb-0 fw-bold" id="w-clouds">-- %</h5>
+                            <span class="text-muted small">Cloud Cover</span>
+                        </div>
+                    </div>
+                    <div class="col-md-8 col-12">
+                        <div class="weather-card p-3 rounded-3 border border-secondary border-opacity-25 d-flex align-items-center justify-content-between">
+                            <div>
+                                <h6 class="mb-1 fw-bold text-success">Condition</h6>
+                                <span class="text-muted text-capitalize" id="w-desc">Awaiting input...</span>
+                            </div>
+                            <i class="fa-solid fa-cloud-showers-water fa-2x text-muted opacity-50"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div class="col-12 mt-4 d-none" id="results-section">
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="glassmorphism p-4 rounded-4 h-100 border-success border-opacity-50" style="border-width: 2px; border-style: solid;">
+                        <h4 class="mb-4 fw-bold text-success"><i class="fa-solid fa-hand-holding-droplet me-2"></i>Irrigation Requirement</h4>
+                        <div class="d-flex align-items-baseline gap-2 mb-3">
+                            <h1 class="display-3 fw-bolder text-white mb-0" id="res-water">0</h1>
+                            <span class="fs-4 text-muted">Liters</span>
+                        </div>
+                        <div class="alert alert-success bg-success bg-opacity-10 border-0">
+                            <i class="fa-solid fa-lightbulb text-warning me-2"></i> 
+                            <span id="res-tips">Efficiency tips will appear here.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="glassmorphism p-4 rounded-4 h-100">
+                        <h4 class="mb-4 fw-bold text-warning"><i class="fa-solid fa-seedling me-2"></i>Recommended Crops</h4>
+                        <p class="text-muted small mb-3">Based on current temp and humidity:</p>
+                        <ul class="list-group list-group-flush bg-transparent" id="res-crops">
+                            <!-- Populated by JS -->
+                        </ul>
+                    </div>
+                </div>
+                <!-- Analytics Chart -->
+                <div class="col-12">
+                    <div class="glassmorphism p-4 rounded-4">
+                        <h4 class="mb-4 fw-bold"><i class="fa-solid fa-chart-area me-2 text-primary"></i>Current Condition Analysis</h4>
+                        <div style="height: 300px;">
+                            <canvas id="analysisChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold"><i class="fa-solid fa-shield-halved text-danger me-2"></i>Admin Dashboard</h2>
+    </div>
+
+    <div class="row g-4 mb-5">
+        <div class="col-md-4">
+            <div class="glassmorphism p-4 rounded-4 text-center border-bottom border-4 border-primary">
+                <i class="fa-solid fa-users fa-2x text-primary mb-2"></i>
+                <h5 class="text-muted">Total Farmers</h5>
+                <h2 class="fw-bold">{{ stats.users }}</h2>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="glassmorphism p-4 rounded-4 text-center border-bottom border-4 border-success">
+                <i class="fa-solid fa-seedling fa-2x text-success mb-2"></i>
+                <h5 class="text-muted">Crop Database</h5>
+                <h2 class="fw-bold">{{ stats.crops }}</h2>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="glassmorphism p-4 rounded-4 text-center border-bottom border-4 border-info">
+                <i class="fa-solid fa-calculator fa-2x text-info mb-2"></i>
+                <h5 class="text-muted">Total Calculations</h5>
+                <h2 class="fw-bold">{{ stats.calculations }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-12">
+            <div class="glassmorphism p-4 rounded-4">
+                <h4 class="mb-4">System Analytics</h4>
+                <div class="alert alert-secondary bg-transparent border-secondary text-muted">
+                    <i class="fa-solid fa-info-circle me-2"></i> Global analytics and detailed user management features will be fully active once populated with more data.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

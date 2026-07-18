@@ -1,0 +1,126 @@
+:root {
+    --primary-color: #0ea5e9;
+    --primary-dark: #0284c7;
+    --success-color: #10b981;
+    --warning-color: #f59e0b;
+    --info-color: #3b82f6;
+    
+    /* Dark Mode Defaults */
+    --bg-start: #0f172a;
+    --bg-end: #1e293b;
+    --glass-bg: rgba(30, 41, 59, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --text-main: #f8fafc;
+    --text-muted: #cbd5e1;
+    --input-bg: rgba(0, 0, 0, 0.2);
+}
+
+[data-bs-theme="light"] {
+    --bg-start: #f0fdfa;
+    --bg-end: #e0f2fe;
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(0, 0, 0, 0.1);
+    --text-main: #0f172a;
+    --text-muted: #475569;
+    --input-bg: rgba(255, 255, 255, 0.5);
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background: linear-gradient(135deg, var(--bg-start), var(--bg-end));
+    color: var(--text-main);
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Background Animation */
+.background-animation {
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
+    animation: rotateBg 40s linear infinite;
+    z-index: -1;
+    pointer-events: none;
+}
+
+@keyframes rotateBg {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Glassmorphism Utilities */
+.glassmorphism {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+}
+
+.glassmorphism-nav {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.glassmorphism-footer {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    border-top: 1px solid var(--glass-border);
+}
+
+/* Typography & Hero */
+.hero-title {
+    background: linear-gradient(to right, var(--success-color), var(--primary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-btn {
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.hero-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px -5px rgba(16, 185, 129, 0.4) !important;
+}
+
+/* Cards & Inputs */
+.feature-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.3);
+}
+
+.custom-input {
+    background: var(--input-bg) !important;
+    border: 1px solid var(--glass-border) !important;
+    color: var(--text-main) !important;
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+}
+.custom-input:focus {
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25) !important;
+    border-color: var(--success-color) !important;
+}
+
+.custom-table {
+    color: var(--text-main);
+}
+.custom-table td, .custom-table th {
+    background: transparent !important;
+}
+
+/* Weather Icons */
+.weather-card {
+    transition: all 0.2s;
+}
+.weather-card:hover {
+    background: rgba(255,255,255,0.05);
+}

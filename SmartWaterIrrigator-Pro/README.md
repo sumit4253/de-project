@@ -34,3 +34,6 @@ A full-stack, production-ready web application designed for smart agriculture. I
    python app.py
    ```
 6. **Access:** Open `http://localhost:5000` in your browser.
+## author 
+ "Mayank Kushwaha "
+ "Prajapati Sumit" 

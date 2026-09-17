@@ -1,23 +1,30 @@
-# 🌱 Smart Irrigation System
+Smart Water Irrigator - Production Ready
+A full-stack, production-ready web application designed for smart agriculture. It calculates precise irrigation requirements based on real-time weather data and recommends suitable crops using advanced data analytics.
 
-A Smart Irrigation System that automatically monitors soil moisture and controls water supply based on the plant's requirements. The system helps reduce water wastage, saves time, and ensures efficient irrigation for healthy plant growth.
-
-## ✨ Features
-
-- 🌱 Automatic irrigation based on soil moisture
-- 💧 Reduces water wastage
-- 📊 Real-time soil moisture monitoring
-- ⚡ Automated water pump control
-- 🌿 Improves plant growth and irrigation efficiency
-
-## 🎯 Objective
-
-The main goal of this project is to provide an efficient and automated irrigation solution that supplies water only when it is required.
-
-## 🛠️ Technologies Used
-
-- Sensors
-- Microcontroller
-- Water Pump
-- Soil Moisture Sensor
-- Arduino/IoT
+Features
+User Authentication: Secure registration, login, and session management.
+Farmer Dashboard: Input field data and receive instant insights.
+Weather Module: Real-time data from OpenWeatherMap.
+Crop Recommendation Engine: Dynamic suggestions based on climatic conditions.
+History & Analytics: Track past calculations and view Chart.js analytics.
+PDF Export: Download professional irrigation reports.
+Admin Panel: Monitor global usage and manage crops.
+Technology Stack
+Backend: Python Flask
+Database: MySQL
+Frontend: HTML5, CSS3, JS, Bootstrap 5, Chart.js
+Local Setup
+Clone/Download the repository
+Install Dependencies:
+pip install -r requirements.txt
+Setup Database:
+Install MySQL Server on your machine.
+Run python database.py to initialize the database and tables (this uses schema.sql).
+Configure Environment:
+Copy .env.example to .env.
+Update your MySQL credentials and OpenWeatherMap API key in the .env file.
+Run Application:
+python app.py
+Access: Open http://localhost:5000 in your browser.
+author
+"Mayank Kushwaha " "Prajapati Sumit"
